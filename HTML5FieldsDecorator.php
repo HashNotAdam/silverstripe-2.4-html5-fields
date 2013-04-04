@@ -104,7 +104,7 @@ class HTML5FieldsDecorator extends DataObjectDecorator {
 
 		if( $validator ) {
 			$func = ($required ? 'add' : 'remove') . 'RequiredField';
-			$validator->$func($this->owner);
+			$validator->$func($this->owner->Name());
 		}
 	}
 }
