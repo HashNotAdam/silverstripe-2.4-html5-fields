@@ -5,7 +5,7 @@ HTML fields for Silverstripe 2.4 that extend the default field types
 ## Requirements
 
 * SilverStripe 2.4 (never tested in other versions)
-* PHP 5.3+ (never tested below 5.3)
+* PHP 5.3+
 
 ## Installation
 
