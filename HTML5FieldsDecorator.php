@@ -79,7 +79,7 @@ class HTML5FieldsDecorator extends DataObjectDecorator {
 		}
 		$vars['ID'] = $this->owner->id();
 
-		return $this->owner->renderWith('HTML5TextFieldHolder', $vars);
+		return $this->owner->renderWith('HTML5FieldHolder', $vars);
 	}
 
 	/**
