@@ -16,7 +16,7 @@ class HTML5TextField extends TextField {
 	/**
 	 * @see HTML5FieldsDecorator::defaultField()
 	 */
-	function Field() {
+	public function Field() {
 		return $this->defaultField();
 	}
 

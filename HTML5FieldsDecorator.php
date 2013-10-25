@@ -24,7 +24,7 @@ class HTML5FieldsDecorator extends DataObjectDecorator {
 	/**
 	 * @param string $content content between opening and closing tags (where used)
 	 */
-	public function defaultField( $content = null ) {
+	public function defaultField($content = null) {
 		// We can generally assume that we want to make an input tag
 		$tagType = isset($this->owner->tagType) ? $this->owner->tagType : 'input';
 
@@ -42,24 +42,33 @@ class HTML5FieldsDecorator extends DataObjectDecorator {
 		);
 
 		$classes = array();
-		if( $tagType == 'input' )
+		if ($tagType == 'input') {
 			$classes[] = 'text';
+		}
 		$classes[] = $this->owner->XML_val('Type');
-		if( $extraClasses = $this->owner->extraClass() )
+		if ($extraClasses = $this->owner->extraClass()) {
 			$classes[] = $extraClasses;
+		}
 		$attributes['class'] = implode(' ', $classes);
 		
-		if( $this->owner->pattern )
+		if ($this->owner->pattern) {
 			$attributes['pattern'] = $this->owner->pattern;
+		}
 
-		if( $this->owner->hasMethod('amendAttributes') )
+		if ($this->owner->hasMethod('amendAttributes')) {
 			$attributes = array_merge($attributes, $this->owner->amendAttributes($attributes));
-		if( $this->owner->hasMethod('amendContent') )
-			$attributes = array_merge($attributes, $this->owner->amendAttributes($attributes));
+		}
 
-		if( $this->owner->placeholder ) $attributes['placeholder'] = $this->owner->placeholder;
-		if( $value = $this->owner->Value() ) $attributes['value'] = $value;
-		if( $this->owner->disabled ) $attributes['disabled'] = 'disabled';
+		$vals = array(
+			'placeholder' => $this->owner->placeholder,
+			'value' => $this->owner->Value(),
+			'disabled' => $this->owner->disabled ? 'disabled' : false
+		);
+		foreach ($vals as $key => $val) {
+			if ($val) {
+				$attributes[$key] = $val;
+			}
+		}
 
 		return $this->createHTML5Tag($tagType, $attributes, $content);
 	}
@@ -99,7 +108,7 @@ class HTML5FieldsDecorator extends DataObjectDecorator {
 	 * @param boolean   $required
 	 * @param Validator $validator Most likely going to be a RequiredFields object
 	 */
-	public function setAsRequired( $required = true, $validator = null ) {
+	public function setAsRequired($required = true, $validator = null) {
 		$this->owner->required = $required;
 
 		if( $validator ) {
